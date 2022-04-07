@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 //회원 정보를 담는 Vo Class
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberVo {
@@ -25,7 +24,4 @@ public class MemberVo {
     int amountBuyingPrice;  //총 구매 금액
     String joinDate;    //가입일
 
-
-
-    
 }
