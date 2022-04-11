@@ -10,7 +10,8 @@ public class MainController{
     @GetMapping("/main")
     public String main(Model model) throws Exception {
         model.addAttribute("content", "/main");
-        return "/templates";        
+        System.out.println("MainController 경유 확인");
+        return "/templates";
     }
     
     
