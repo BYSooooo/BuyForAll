@@ -1,4 +1,4 @@
-package com.example.buyforall.Member;
+package com.example.buyforall.Member.Vo;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

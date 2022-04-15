@@ -1,8 +1,46 @@
+<!DOCTYPE html>
 <html 
 xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
-    <div class="header">
-        <h2>Header</h2>
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+</th:block>
+
+
+<!-- 헤더 전체 div-->
+<div id="headerWrapper" class="container">
+    <!-- 헤더 상단 이벤트 안내-->
+    <div id="headerTop">
+        <h2> 이벤트 광고 배너 자리</h2>
 
     </div>
+    <!-- 헤더 중단 배너, 검색 및 링크 -->
+    <div id="headerMiddle">
+        <!-- 로고-->
+        <div id = "mainLogo" class="headerItem">
+            <h3>로고 자리</h3>
+            <!-- <a th:href="@{/main}">
+                <img id="logo" th:src="@{/images/people.png}" />
+                <div>BuyForAll</div>
+            </a> -->
+        </div>
+        <!-- 검색창-->
+        <div id="mainSearchBox" class="headerItem">
+            <h3>검색 박스 자리</h3>
+        </div>
+        <div id="linkButton" class="headerItem">
+            <a th:href="@{/loginForm}">
+                <img id="loginIcon" th:src="@{/images/user.png}" />
+            </a>
+            <img id="shoppingCart" th:src="@{/images/shopping-cart.png}" />
+        </div>
+    </div>
+    <!-- 헤더 하단 카테고리 표시 부분 -->
+    <div id="headerBottom">
+        <h3>카테고리 표시 부분</h3>
+    </div>
+</div>
+    
 </html>

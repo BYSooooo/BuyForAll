@@ -1,0 +1,9 @@
+/* 사이트 전체에 적용되는 CSS 요소는 이 곳에 추가할 것 */
+
+/* Google Font*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* container라는 클래스는 모두 동일 글꼴 적용 */
+.container {
+    font-family: 'Noto Sans KR', sans-serif;
+}
