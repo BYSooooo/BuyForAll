@@ -6,6 +6,7 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
 >
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/header.css}" />
+    
 </th:block>
 
 
@@ -17,20 +18,25 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
 
     </div>
     <!-- 헤더 중단 배너, 검색 및 링크 -->
-    <div id="headerMiddle">
+    <div id="headerMiddle" class="row">
         <!-- 로고-->
-        <div id = "mainLogo" class="headerItem">
-            <h3>로고 자리</h3>
-            <!-- <a th:href="@{/main}">
-                <img id="logo" th:src="@{/images/people.png}" />
-                <div>BuyForAll</div>
-            </a> -->
+        <div id = "mainLogo" class="col-lg-3">
+            <a th:href="@{/main}">
+                <img id="logoImg" th:src="@{/images/people.png}" />
+                <div id="logoTxt">BuyForAll</div>
+            </a>
         </div>
         <!-- 검색창-->
-        <div id="mainSearchBox" class="headerItem">
-            <h3>검색 박스 자리</h3>
+        <div id="mainSearchBox" class="col-lg-6">
+            <form>
+                <div id="searchForm" class="input-group input-group-lg mb-3">
+                        <input id="searchInput" type="text" class="form-control">
+                        <button id="searchButton" type="submit" class="btn btn-default btn-block">검색</button>
+                </div>
+            </form>
         </div>
-        <div id="linkButton" class="headerItem">
+        
+        <div id="linkButton" class="col-lg-3">
             <a th:href="@{/loginForm}">
                 <img id="loginIcon" th:src="@{/images/user.png}" />
             </a>

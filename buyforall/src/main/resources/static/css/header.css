@@ -1,53 +1,39 @@
 /* 헤더 전체 */
 #headerWrapper {
     border: 1px solid red;
-    width: 100%;
-    margin:0;
-}
-/* 헤더 내부 상단 이벤트 배너 부분*/
-#headerTop {
-    width: 100%;
-    overflow: hidden;
-    height: 5em;
-}
-/* 헤더 내부 중단 헤더 본문 */
-#headerMiddle {
-    padding-bottom: 2em;
-    height: 2em;
-}
-/* 헤더 내부 아이템들의 공통 적용 사항*/
-.headerItem {
-    display: inline-table;
-    float: left;
-    height: 4em;
-    border: 1px solid blue;
-}
-/* 헤더 중단 좌측의 로고 부분 */
-#mainLogo {
-    width: 20%;
-    padding-left: 1em;
-}
-/* 헤다 중단 중앙의 검색창 부분 */
-#mainSearchBox {
-    width: 50%;
-    padding-left: 1em;
-    padding-right: 1em;
-}
-/* 헤더 중단 우측의 메뉴 링크 부분 */
-#linkButton {
-    width: 20%;
-    padding-right: 1em;
-}
-#loginIcon, #shoppingCart {
-    width: 80px;
-    height: auto;
-    color: darkgray;
-    object-fit: cover;
+    min-width: none;
 }
 
-/* 헤더 하단 카테고리 메뉴 접근 부분 */
-#headerBottom {
-    height: 2em;
+#headerMiddle {
+    vertical-align: middle;
+}
+/* 로고 이미지 크기 */
+#logoImg{
+    width: 50px;
+    display: inline-block;
+}
+/* 로고 텍스트*/
+#logoTxt  {
+    display: inline-block;
+}
+
+#searchForm {
+    vertical-align: middle;
+}
+#searchInput {
+    display: inline-block;
+    width: 70%;
+}
+#searchButton {
+    display: inline-block;
+    width: 20%
+}
+
+
+/* 링크 이미지 크기 조정 */
+#loginIcon, #shoppingCart {
+    width: 50px;
+    height: auto;
 }
 
 
