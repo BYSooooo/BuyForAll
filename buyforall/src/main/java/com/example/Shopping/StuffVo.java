@@ -1,4 +1,4 @@
-package com.example.buyforall.Shopping;
+package com.example.Shopping;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

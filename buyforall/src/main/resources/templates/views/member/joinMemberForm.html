@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html 
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{css/member/loginForm.css}" />
+    </th:block>
+    <th:block layout:fragment="script">
+        <script th:src="@{/javascript/member/joinMemberForm.js}" ></script>
+    </th:block>
+
+    <div id="joinContainer" class="container">
+        <div id="mainJoinFirst">
+            <form action="@{/joinFormSe}">
+                <div id="welcomeJoin">
+                    <h1 class="form-signin-heading">회원가입</h1>
+                </div>
+
+                <div id="inputEmailAndNum">
+                    <label for="username">이메일</label>
+                    <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="Example@email.com" />
+                    <div id="checkDBEmail"></div>
+                    <button id="checkEmail" type="button" class="btn btn-primary btn-lg btn-block">인증번호발송</button>
+                </div>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+</html>
