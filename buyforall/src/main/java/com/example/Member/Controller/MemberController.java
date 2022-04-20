@@ -31,8 +31,9 @@ public class MemberController {
     //회원 가입 단계에서 이메일 DB 확인
     @RequestMapping(value="/checkDBEmail", method = RequestMethod.POST)
     public @ResponseBody String checkEmail(@RequestParam("memberEmail") String memberEmail, Model model) {
+        System.out.println("MemberController : "+memberEmail);
         int checkResult = memberService.checkEmail(memberEmail);
-        System.out.println(checkResult);
+        System.out.println("checkResult : "+checkResult);
         
         return "/templates";
 

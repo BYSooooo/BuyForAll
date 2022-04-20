@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.exmaple.Member.Vo.MemberVo" alias="MemberVo" />
+        <typeAlias type="com.example.Member.Vo.MemberVo" alias="MemberVo" />
     </typeAliases>
 </configuration>

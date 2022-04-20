@@ -1,28 +1,24 @@
-$(document).ready(function() {
+window.onload = function () {
 
     // 가입 과정 중 Email 중복 검사
-    $('checkEmail').click(function() {
-        const memberEmail = $('#memberEmail').val();
-        checkEmailAjax('/checkDBEmail', memberEmail);
-    })
-
-    // 이메일 체크 Ajax
-    const checkEmailAjax = function(url, memberEmail) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: {
-                    memberEmail: memberEmail
-                },
-                success: function (data) {
-                    resolve(data);
-                },
-                error: function(e) {
-                    reject(e);
+    document.getElementById('checkEmail').addEventListener('click',() => {
+        var memberEmail = document.getElementById("memberEmail").value;
+        console.log("javascript : " + memberEmail);
+        var requestJson = new Object();
+        requestJson.name = memberEmail;
+        httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = () => {
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status == 200) {
+                    var result = httpRequest.response;
+                    
+                } else {
+                    console.log("AJAX 에러 발생")
                 }
-            })
-        })
-    }
-
-})
+            }
+        };
+        httpRequest.open('POST', '/checkDBEmail?memberEmail=' + memberEmail);
+        httpRequest.responseType = "json";
+        httpRequest.send();
+    })
+}
