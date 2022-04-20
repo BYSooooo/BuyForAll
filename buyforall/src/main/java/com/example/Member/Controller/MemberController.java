@@ -33,8 +33,7 @@ public class MemberController {
     public @ResponseBody String checkEmail(@RequestParam("memberEmail") String memberEmail, Model model) {
         System.out.println("MemberController : "+memberEmail);
         int checkResult = memberService.checkEmail(memberEmail);
-        System.out.println("checkResult : "+checkResult);
-        
+        System.out.println("checkResult : "+checkResult);       
         return "/templates";
 
     }

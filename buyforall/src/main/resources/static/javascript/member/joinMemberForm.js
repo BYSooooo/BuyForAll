@@ -1,5 +1,4 @@
 window.onload = function () {
-
     // 가입 과정 중 Email 중복 검사
     document.getElementById('checkEmail').addEventListener('click',() => {
         var memberEmail = document.getElementById("memberEmail").value;
