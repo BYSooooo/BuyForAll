@@ -3,10 +3,33 @@
 xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
-<th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{css/loginForm.css}" />
-</th:block>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{css/member/loginForm.css}" />
+    </th:block>
 
-<h1> 로그인 화면 입니다.</h1>
-
+    <div id="loginContainer" class="container">
+        <div id="mainLogin">
+            <form action="@{/doLogin}">
+                <div id="welcome_text">
+                    <h1 class="form-signin-heading">로그인</h1>
+                </div>
+                <div class="inputIdPwd">
+                    <label for="username">ID</label>
+                    <input type="text" class="form-control" id="username" placeholder="아이디를 입력하세요" />
+                
+                    <label for="password">Password</laben>
+                    <input type="text" class="form-control" id="password" placeholder="비밀번호를 입력하세요" />
+                </div>
+                <div>
+                    <button id="loginButton" type="submit" class="btn btn-primary btn-lg btn-block">로그인</button> 
+                </div>
+                <div>
+                    <a th:href="@{/joinMemberForm}">
+                        <button id="joinMember" type="button" class="btn btn-primary btn-lg btn-block">회원가입</button>
+                    </a>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
 </html>

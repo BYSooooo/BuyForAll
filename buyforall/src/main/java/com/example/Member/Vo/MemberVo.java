@@ -1,12 +1,14 @@
-package com.example.buyforall.Member.Vo;
+package com.example.Member.Vo;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 //회원 정보를 담는 Vo Class
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberVo {

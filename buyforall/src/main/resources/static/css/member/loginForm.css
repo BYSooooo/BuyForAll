@@ -1,0 +1,18 @@
+/* 로그인 기본 프레임*/
+#loginContainer {
+    border: 1px solid red;
+    
+}
+/* 로그인 폼*/
+#mainLogin {
+    width: 70%;
+    background-color: rgb(230, 230, 230);
+    margin-top: 1em;
+    border-radius: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+/* 아이디, 패스워드 입력 부분 div*/
+/* .inputIdPwd {
+
+} */
