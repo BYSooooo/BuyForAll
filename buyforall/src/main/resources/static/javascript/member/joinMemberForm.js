@@ -8,12 +8,16 @@ window.onload = function () {
         httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = () => {
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                var requestResult = httpRequest.response;
                 if (httpRequest.status == 200) {
-                    var result = httpRequest.response;
-                    
+                    var verifyNumber = requestResult.veriNum;
+                    console.log(verifyNumber);
                 } else {
-                    console.log("AJAX 에러 발생")
+                    console.log("AJAX 에러 발생");
+                    
                 }
+                var resultMessage = requestResult.result;
+                console.log(resultMessage);
             }
         };
         httpRequest.open('POST', '/checkDBEmail?memberEmail=' + memberEmail);
