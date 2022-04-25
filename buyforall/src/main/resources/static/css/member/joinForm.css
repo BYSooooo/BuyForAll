@@ -1,0 +1,28 @@
+/* 회원가입 폼 기본 div*/
+#joinFormFirst {
+    /* 기본 디자인 및 여백 설정*/
+    width: 70%;
+    max-width: 550px;
+    background-color: rgb(230, 230, 230);
+    margin: 1em auto 1em auto;
+    padding: 2em;
+    border-radius: 1em;
+
+    /* 내부 스크롤 설정*/
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+#sectionOne #sectionTwo {
+    height: 10em;
+    float: left;
+}
+/* 인증번호발송 과 다음 버튼 div */
+#sendAndNext {
+    margin-top: 1em;
+
+}
+/* '다음' 버튼 */
+#nextButton {
+    float: right;
+}

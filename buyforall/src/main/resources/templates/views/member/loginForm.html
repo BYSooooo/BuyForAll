@@ -17,17 +17,16 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
                     <label for="username">ID</label>
                     <input type="text" class="form-control" id="username" placeholder="아이디를 입력하세요" />
                 
-                    <label for="password">Password</laben>
+                    <label for="password">Password</label>
                     <input type="text" class="form-control" id="password" placeholder="비밀번호를 입력하세요" />
                 </div>
-                <div>
-                    <button id="loginButton" type="submit" class="btn btn-primary btn-lg btn-block">로그인</button> 
-                </div>
-                <div>
+                <div id="loginAndJoin">
+                    <button id="loginButton" type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
+                    
                     <a th:href="@{/joinMemberForm}">
                         <button id="joinMember" type="button" class="btn btn-primary btn-lg btn-block">회원가입</button>
                     </a>
-                    
+
                 </div>
             </form>
         </div>

@@ -23,5 +23,5 @@ window.onload = function () {
         httpRequest.open('POST', '/checkDBEmail?memberEmail=' + memberEmail);
         httpRequest.responseType = "json";
         httpRequest.send();
-    })
+    })   
 }
