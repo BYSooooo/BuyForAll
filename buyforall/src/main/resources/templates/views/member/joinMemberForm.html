@@ -11,9 +11,9 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
     </th:block>
 
     <div id="joinContainer" class="container">
-        <div id="joinFormFirst" class="container-fluid">
+        <div id="joinFormFirst">
             <form action="@{/joinFormSe}">
-                <div id="sectionOne" >
+                <div id="sectionOne">
                     <div class="welcomeJoin">
                         <h1 class="form-signin-heading">회원가입</h1>
                     </div>
@@ -33,8 +33,7 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
                     </div>
                     <div id="sendButton">
                         <button id="checkEmail" type="button" class="btn btn-primary btn-lg btn-block">인증번호발송</button>
-                        <button id="toJoinSe" type="button" class="btn btn-primary btn-lg btn-block" disabled="true">다음</button>
-                        
+                        <button id="toJoinSe" type="button" class="btn btn-primary btn-lg btn-block" disabled>다음</button>
                     </div>
                 </div>
                 <div id="sectionTwo">
@@ -55,9 +54,7 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
                         <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="인증번호를 입력하세요" /> 
                     </div>
                     <div id="beforeAndnext">
-                        <a class="nav-link" href="#sectionOne">
-                            <button id="beforeButton" type="button" class="btn btn-primary btn-lg btn-block">이전</button>    
-                        </a>
+                        <button id="beforeButton" type="button" class="btn btn-primary btn-lg btn-block">이전</button>    
                         <button id="nextButton" type="button" class="btn btn-primary btn-lg btn-block" disabled>다음</button>
                     </div>
                     

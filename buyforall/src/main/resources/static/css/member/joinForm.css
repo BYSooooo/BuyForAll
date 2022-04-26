@@ -10,9 +10,11 @@
     border-radius: 1em;
 
     /* 내부 스크롤 설정 */
-    overflow:hidden;
+    overflow: scroll;
     white-space: nowrap;
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    
 }
 /* 이메일 입력, 인증번호 입력 단계별 전체 div*/
 #sectionOne,#sectionTwo {
