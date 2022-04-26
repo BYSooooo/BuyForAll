@@ -1,7 +1,5 @@
 package com.example.Mail.Dao;
 
-import java.io.Console;
-
 import com.example.Mail.Vo.MailVo;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,26 +1,81 @@
-/* 회원가입 폼 기본 div*/
+/* 회원가입 폼 기본 div */
 #joinFormFirst {
-    /* 기본 디자인 및 여백 설정*/
+    /* 기본 디자인 및 여백 설정 */
     width: 70%;
     max-width: 550px;
+    height: 400px;
     background-color: rgb(230, 230, 230);
     margin: 1em auto 1em auto;
-    padding: 2em;
+    padding: 2em; 
     border-radius: 1em;
 
-    /* 내부 스크롤 설정*/
-    overflow-x: scroll;
+    /* 내부 스크롤 설정 */
+    overflow:hidden;
     white-space: nowrap;
+    scroll-behavior: smooth;
+}
+/* 이메일 입력, 인증번호 입력 단계별 전체 div*/
+#sectionOne,#sectionTwo {
+    vertical-align:auto;
+    display: inline-block;
+    margin: 0 2em 0 0;
+    width: 100%;
+    height: 100%;
+}
+/* 진행 단계 표시 div */
+.joinIndex {
+    margin: 1em 0 1em 0;
+    position: relative;
+    max-width: 30%;
+    text-align: center;
+    background-color: white;
+    border-radius: 0.3em;
+}
+/* 진행 단계 index 첫 번째 */
+#indexFst {
+    position:absolute;
+    margin-left: -0.95em;
+    opacity: 40%;
+    background-color: red;
+    width: 20%;
+    height: 100%;
+    border-radius: 0.3em;
+}
+/* 진행 단계 index 두 번째 */
+#indexSe {
+    position:absolute;
+    margin-left: -0.95em;
+    opacity: 40%;
+    background-color: orange;
+    width: 40%;
+    height: 100%;
+    border-radius: 0.3em;
 }
 
-#sectionOne #sectionTwo {
-    height: 10em;
-    float: left;
+/* 진행 단계 index 설명 */
+.joinComment {
+    font-size: small;
+    color: cadetblue;
+}
+
+
+/* 이메일, 인증번호 input div*/
+.inputEmailAndNum {
+    margin: 2em 0 1em 0;
+}
+
+/* 이메일 발송 전 DB 중복 체크 결과 */
+#checkDBEmail {
+    color: orangered;
+    font-size: small;
+}
+/* 회원가입 2단계로 넘어가는 '다음' 버튼 */
+#toJoinSe {
+    float: right;
 }
 /* 인증번호발송 과 다음 버튼 div */
 #sendAndNext {
     margin-top: 1em;
-
 }
 /* '다음' 버튼 */
 #nextButton {

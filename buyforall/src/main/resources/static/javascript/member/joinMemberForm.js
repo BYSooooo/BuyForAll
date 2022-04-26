@@ -11,17 +11,19 @@ window.onload = function () {
                 var requestResult = httpRequest.response;
                 if (httpRequest.status == 200) {
                     var verifyNumber = requestResult.veriNum;
+                    var BtnToSeStatus = document.getElementById('toJoinSe');
+                    BtnToSeStatus.disabled =  false;
                     console.log(verifyNumber);
                 } else {
                     console.log("AJAX 에러 발생");
-                    
                 }
                 var resultMessage = requestResult.result;
+                document.getElementById('checkDBEmail').innerText = resultMessage;
                 console.log(resultMessage);
             }
         };
         httpRequest.open('POST', '/checkDBEmail?memberEmail=' + memberEmail);
         httpRequest.responseType = "json";
         httpRequest.send();
-    })   
+    })
 }
