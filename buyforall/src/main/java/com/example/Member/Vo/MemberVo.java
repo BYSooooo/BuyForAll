@@ -20,6 +20,7 @@ public class MemberVo {
     @Email
     String memberEmail; //회원 이메일
     String memberGrade; //회원 등급(Security Role)
+    String postNumber;  // 회원 주소의 우편번호
     String memberAddress;   //회원 주소
     
     String lastLogin;   //마지막 로그인

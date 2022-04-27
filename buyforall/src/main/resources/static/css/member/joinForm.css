@@ -1,23 +1,15 @@
 /* 회원가입 폼 기본 div */
-#joinFormFirst {
+.joinFormLayout {
     /* 기본 디자인 및 여백 설정 */
     width: 70%;
     max-width: 550px;
-    height: 400px;
     background-color: rgb(230, 230, 230);
     margin: 1em auto 1em auto;
     padding: 2em; 
     border-radius: 1em;
-
-    /* 내부 스크롤 설정 */
-    overflow: scroll;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    
 }
-/* 이메일 입력, 인증번호 입력 단계별 전체 div*/
-#sectionOne,#sectionTwo {
+/* 이메일 입력, 인증번호 입력 전체 div*/
+#sectionOne, #sectionTwo {
     vertical-align:auto;
     display: inline-block;
     margin: 0 2em 0 0;
@@ -53,21 +45,34 @@
     height: 100%;
     border-radius: 0.3em;
 }
+/* 진행 단계 index 세 번째*/
+#indexThd {
+    position:absolute;
+    margin-left: -0.38em;
+    opacity: 40%;
+    background-color: rgb(255, 204, 0);
+    width: 60%;
+    height: 100%;
+    border-radius: 0.3em;
+}
+
+/* 단계에 따른 진행상황 및 코멘트 변화를 위한 Style */
+#taskTwo {
+    display: none;
+}
 
 /* 진행 단계 index 설명 */
 .joinComment {
     font-size: small;
     color: cadetblue;
 }
-
-
 /* 이메일, 인증번호 input div*/
 .inputEmailAndNum {
     margin: 2em 0 1em 0;
 }
 
-/* 이메일 발송 전 DB 중복 체크 결과 */
-#checkDBEmail {
+/* 입력값 체크 결과 출력 div 디자인 */
+.inputCheckResult {
     color: orangered;
     font-size: small;
 }
@@ -82,4 +87,14 @@
 /* '다음' 버튼 */
 #nextButton {
     float: right;
+}
+/* 추가정보 입력 칸*/
+#inputInfo {
+    margin-top: 2em;
+}
+
+/* 주소 입력 창 첫번째 div */
+#addressDiv {
+    width: 15em;
+    display:inline-flex;
 }

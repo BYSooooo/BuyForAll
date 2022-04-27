@@ -11,56 +11,53 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
     </th:block>
 
     <div id="joinContainer" class="container">
-        <div id="joinFormFirst">
-            <form action="@{/joinFormSe}">
+        <div class="joinFormLayout">
+            <form action="/joinFormSe" method="POST">
                 <div id="sectionOne">
                     <div class="welcomeJoin">
                         <h1 class="form-signin-heading">회원가입</h1>
                     </div>
-                    <div class="joinIndex">
-                        <span id="indexFst"> </span>
-                        (1/5) 이메일 입력
+                    <div id ="taskOne">
+                        <div class="joinIndex">
+                            <span id="indexFst"> </span>
+                            (1/5) 이메일 입력
+                        </div>
+                        <div class="joinComment">
+                            BuyForAll의 회원가입을 위해 이메일을 입력해주세요.<br>
+                            입력하신 이메일로 인증번호가 전송됩니다.<br>
+                            <br>
+                        </div>
                     </div>
-                    <div class="joinComment">
-                        BuyForAll의 회원가입을 위해 이메일을 입력해주세요.<br>
-                        입력하신 이메일로 인증번호가 전송됩니다.<br>
-                        <br>
-                    </div>
-                    <div class="inputEmailAndNum">
-                        <label for="username"> Email Address</label>
-                        <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="Example@email.com" />
-                        <div id="checkDBEmail"><br></div>
-                    </div>
-                    <div id="sendButton">
-                        <button id="checkEmail" type="button" class="btn btn-primary btn-lg btn-block">인증번호발송</button>
-                        <button id="toJoinSe" type="button" class="btn btn-primary btn-lg btn-block" disabled>다음</button>
-                    </div>
-                </div>
-                <div id="sectionTwo">
-                    <div class="welcomeJoin">
-                        <h1 class="form-signin-heading">회원가입</h1>
-                    </div>
-                    <div class="joinIndex">
-                        <span id="indexSe"> </span>
-                        (2/5) 사용자 인증
-                    </div>
-                    <div class="joinComment">
-                        이메일로 인증번호가 전송되었습니다.<br>
-                        인증번호를 입력 후 '다음'을 클릭해 진행해주세요.<br>
-                        다른 이메일을 사용하시려면 '이전'을 클릭하세요.<br>
-                    </div>
-                    <div class="inputEmailAndNum">
-                        <label for="inputNumber">Verify Number</label>
-                        <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="인증번호를 입력하세요" /> 
-                    </div>
-                    <div id="beforeAndnext">
-                        <button id="beforeButton" type="button" class="btn btn-primary btn-lg btn-block">이전</button>    
-                        <button id="nextButton" type="button" class="btn btn-primary btn-lg btn-block" disabled>다음</button>
-                    </div>
-                    
-                </div>
 
-                
+                    <div id = "taskTwo">
+                        <div class="joinIndex">
+                            <span id="indexSe"> </span>
+                            (2/5) 사용자 인증
+                        </div>
+                        <div id="commentTwo" class="joinComment">
+                            이메일로 인증번호가 전송되었습니다.<br>
+                            인증번호를 입력 후 '다음'을 클릭해 진행해주세요.<br>
+                            다른 이메일을 사용하시려면 재입력 후 '인증번호 재발송'을 클릭하세요.<br>
+                        </div>
+                    </div>
+
+                    <div class="inputEmailAndNum">
+                        <label for="memberEmail" class="form-label"> Email Address</label>
+                        <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="Example@email.com" />
+                        <div id="checkDBEmail" class="inputCheckResult"><br></div>
+                    </div>
+                    <div id="sendButton" class="d-grid gap-2">
+                        <button id="checkEmail" type="button" class="btn btn-primary">인증번호발송</button>
+                    </div>
+                    <div class="inputEmailAndNum">
+                        <label for="inputNumber" class="form-label">Verify Number</label>
+                        <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="인증번호를 입력하세요" disabled/> 
+                        <div id="checkVeriNum" class="inputCheckResult" ><br></div>
+                    </div>
+                    <div id="beforeAndnext" class="d-grid gap-2">    
+                        <button id="nextButton" type="submit" class="btn btn-primary" disabled>다음</button>
+                    </div>  
+                </div>
             </form>
         </div>
     </div>
