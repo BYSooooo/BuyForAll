@@ -35,6 +35,14 @@ public class MemberController {
         model.addAttribute("content", "/views/member/joinMemberForm");
         return "/templates";
     }
+    //회원 가입 두번째 폼으로 이동
+    @RequestMapping(value="/joinFormSe", method = RequestMethod.POST)
+    public String goJoinPageSe(Model model, @RequestParam("memberEmail") String memberEmail) {
+        model.addAttribute("memberEmail", memberEmail);
+        model.addAttribute("content", "/views/member/joinMemberFormSe");
+        return "/templates";
+    }
+
     //회원 가입 단계에서 이메일 DB 확인
     @RequestMapping(value="/checkDBEmail", method = RequestMethod.POST)
     public @ResponseBody Map<String,Object> checkEmail(@RequestParam("memberEmail") String memberEmail) {
