@@ -31,7 +31,7 @@
     margin-left: -0.95em;
     opacity: 40%;
     background-color: red;
-    width: 20%;
+    width: 25%;
     height: 100%;
     border-radius: 0.3em;
 }
@@ -41,7 +41,7 @@
     margin-left: -0.95em;
     opacity: 40%;
     background-color: orange;
-    width: 40%;
+    width: 50%;
     height: 100%;
     border-radius: 0.3em;
 }
@@ -50,8 +50,18 @@
     position:absolute;
     margin-left: -0.38em;
     opacity: 40%;
-    background-color: rgb(255, 204, 0);
-    width: 60%;
+    background-color:limegreen;
+    width: 75%;
+    height: 100%;
+    border-radius: 0.3em;
+}
+/* 진행 단계 index 네 번째 */
+#indexFourth {
+    position:absolute;
+    margin-left: -0.59em;
+    opacity: 20%;
+    background-color:blue;
+    width: 100%;
     height: 100%;
     border-radius: 0.3em;
 }
@@ -97,4 +107,9 @@
 #addressDiv {
     width: 15em;
     display:inline-flex;
+}
+
+/* 가입 완료 후 로그인 화면으로 div */
+#returnLoginForm {
+    margin-top: 15em;
 }

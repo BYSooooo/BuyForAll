@@ -37,7 +37,7 @@
                     }
     
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                    document.getElementById('postNum').value = data.zonecode;
+                    document.getElementById('postNumber').value = data.zonecode;
                     document.getElementById("roadAddress").value = roadAddr;
                     document.getElementById("jibunAddress").value = data.jibunAddress;
                     
@@ -72,7 +72,7 @@
 
     <div id="joinContainerSe" class="container">
         <div class="joinFormLayout">
-            <form action="@{/joinMember}" method="POST">
+            <form action="/joinMember" method="POST">
                 <div id="sectionTwo">
                     <div class="welcomeJoin">
                         <h1 class="form-signin-heading">회원가입</h1>
@@ -80,7 +80,7 @@
                     <div id ="taskThree">
                         <div class="joinIndex">
                             <span id="indexThd"> </span>
-                            (3/5) 추가 정보 입력
+                            (3/4) 추가 정보 입력
                         </div>
                         <div class="joinComment">
                             가입에 필요한 추가 정보를 입력하세요. <br>
@@ -90,14 +90,14 @@
                     </div>
                     <div id="inputInfo">
                         <div class="mb-3">
-                            <label for="username">* 회원 ID</label>
-                            <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="영문 대소문자,숫자를 포함한 10~15자">
-                            <div id="checkIDResult" class="inputCheckResult" ></div>
+                            <label for="memberId">* 회원 ID</label>
+                            <input type="text" class="form-control form-control-sm" id="memberId" name="memberId" th:value="${memberId}"placeholder="영문 대소문자,숫자를 포함한 10~15자">
+                            <div id="checkIDResult" class="inputCheckResult" th:text="${valid_memberId}"></div>
                         </div>
                         <div class="mb-3">
                             <label for="password">* Password</label>
                             <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="영문 대소문자,숫자,특수문자를 포함한 10~20자">
-                            <div id="checkPwResult" class="inputCheckResult" ></div>
+                            <div id="checkPwResult" class="inputCheckResult" th:text="${valid_password}"></div>
                         </div>
                         <div class="mb-3">
                             <label for="memberEmail">* Email</label>
@@ -107,23 +107,24 @@
                         </div>
                         <div class="mb-3">
                             <label for="memberName">* 이름</label>
-                            <input type="text" class="form-control form-control-sm" id="memberName" name="memberName" placeholder="이름을 입력하세요">
+                            <input type="text" class="form-control form-control-sm" id="memberName" name="memberName" th:value="${memberName}"placeholder="이름을 입력하세요">
+                            <div class="inputCheckResult" th:text="${valid_memberName}"></div>
                         </div>
-                        <label for="memberAddress">주소지</label>
+                        <label for="memberAddress">주소지 (주문 시 배송지로 활용됩니다.)</label>
                         <div class="mb-3">
                             <div id="addressDiv">
-                                <input type="text" aria-label="PostNum" class="form-control form-control-sm" id="postNum" name="postNum" placeholder="우편번호">
+                                <input type="text" aria-label="PostNumber" class="form-control form-control-sm" id="postNumber" name="postNumber" th:value="${postNumber}" placeholder="우편번호">
                                 <input class="btn btn-outline-secondary btn-sm" type="button" id="searchAddr" value="검색" onclick="searchAddress()">
                             </div>
                             
-                            <input type="text" aira-label="roadAddress" class="form-control form-control-sm" id="roadAddress" name="roadAddress" placeholder="도로명 주소">
-                            <input type="text" aira-label="extrAddress" class="form-control form-control-sm" id="extrAddress" name="extrAddress" placeholder="나머지 주소를 입력하세요">
+                            <input type="text" aira-label="roadAddress" class="form-control form-control-sm" id="roadAddress" name="roadAddress" th:value="${roadAddress}" placeholder="도로명 주소">
+                            <input type="text" aira-label="extrAddress" class="form-control form-control-sm" id="extrAddress" name="extrAddress" th:value="${extrAddress}"placeholder="나머지 주소를 입력하세요">
                             <input type="text" id="jibunAddress" hidden>
                             <input type="text" id="addressEtc" hidden>
                             
                         </div>
                         <a th:href="@{/joinMemberForm}" class="btn btn-primary" role="button">처음으로</a>
-                        <button type="submit" class="btn btn-primary">다음</button>
+                        <button type="submit" class="btn btn-primary" id="nextButton" disabled>다음</button>
 
                     </div>                    
                 </div>

@@ -3,13 +3,18 @@ package com.example.Member.Controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import com.example.Mail.Service.MailService;
 import com.example.Member.Service.MemberService;
+import com.example.Member.Vo.MemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,8 +69,57 @@ public class MemberController {
         } else {
             returnResult.put("result", "이미 사용중인 이메일입니다.");
             return returnResult;
-            
         }
+    }
+    //회원 가입 단계에서 회원 아이디 중복 검사 Ajax
+    @RequestMapping(value="/checkDBId", method = RequestMethod.POST)
+    public @ResponseBody Map<String, String> checkDBId(@RequestParam("memberId") String memberId) {
+        int checkIdResult = memberService.checkId(memberId);
+
+        Map<String, String> map = new HashMap<>();
+        if(checkIdResult == 0) {
+            //중복된 값이 없으므로 가입이 가능하다는 텍스트 반환
+            map.put("result", "사용이 가능한 아이디 입니다.");
+            map.put("nextButton","abled");
+        } else {
+            //중복 값이 있으므로 사용이 불가
+            map.put("result", "사용중인 아이디입니다. 다른 아이디를 사용하세요.");
+            map.put("nextButton","disabled");
+        }
+        return map;
+    }
+
+
+
+    //최종 회원 정보 DB 입력
+    @RequestMapping(value="/joinMember", method=RequestMethod.POST)
+    public String joinMember(@Valid @ModelAttribute MemberVo member, BindingResult bindingResult, 
+    @RequestParam("roadAddress") String roadAddress, @RequestParam("extrAddress") String extrAddress, Model model) {
+
+        // Vo Class의 Validation 결과를 통해 문제가 있으면 메시지 반환
+        if (bindingResult.hasErrors()) {
+            Map<String,String> map = memberService.validate(bindingResult);
+            for(String key: map.keySet()) {
+                model.addAttribute(key, map.get(key));  
+            }
+            //Validaion에 사용했던 값들 다시 반환
+            model.addAttribute("memberId",member.getMemberId());
+            model.addAttribute("memberEmail",member.getMemberEmail());
+            model.addAttribute("memberName",member.getMemberName());
+            model.addAttribute("postNumber",member.getPostNumber());
+            model.addAttribute("roadAddress",roadAddress);
+            model.addAttribute("extrAddress",extrAddress);
+            model.addAttribute("content","/views/member/joinMemberFormSe");
+            
+        } else {
+            //Validation 문제가 없다면 DB에 저장 단계로 진행
+            //검색 주소와 나머지 주소를 합쳐서 주소를 만듦
+            String fullAddress = roadAddress + " " + extrAddress;
+            member.setMemberAddress(fullAddress);
+            memberService.insertMember(member);
+            model.addAttribute("content", "/views/member/joinComplete");
+        }
+        return "/templates";
     }
 }
 
