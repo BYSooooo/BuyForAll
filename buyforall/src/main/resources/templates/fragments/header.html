@@ -3,7 +3,8 @@
 xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
-xmlns:sec="http://thymeleaf.org/extras/spring-security"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+
 >
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/header.css}" />
@@ -38,13 +39,13 @@ xmlns:sec="http://thymeleaf.org/extras/spring-security"
         </div>
         
         <div id="linkButton" class="col-lg-3">
-            <span sec:authorize="isAnonymous()">
+            <span th:if="${member==null}" sec:authorize="!isAuthenticated()">
                 <a th:href="@{/loginForm}" >
                     <img id="loginIcon" th:src="@{/images/user.png}" />
                 </a>
             </span>
-            <span sec:authorize="hasRole('ROLE_USER')">
-                반갑습니다.
+            <span th:if="${member != null}" sec:authorize="isAuthenticated()">
+                <span  th:text="${member.getMember().getMemberName()}"></span>,님 반갑습니다.
             </span>
             
             

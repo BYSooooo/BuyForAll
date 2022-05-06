@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,11 +122,13 @@ public class MemberController {
             model.addAttribute("content", "/views/member/joinComplete");
         }
         return "/templates";
-    }
+    }   
 
+    //로그인이 성공 했을 경우 실행할 작업
     @RequestMapping(value="/loginSuccess", method = RequestMethod.POST)
     public String loginSuccess(@AuthenticationPrincipal SecMemberVo member, Model model) {
-        System.out.println(member.getUsername());
+        //회원 정보를 View로 전달한다.
+        model.addAttribute("member", member);
 
         model.addAttribute("content","/main");
         return "/templates";
