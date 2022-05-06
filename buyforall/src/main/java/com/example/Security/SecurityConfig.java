@@ -33,8 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .successForwardUrl("/loginSuccess")
         .failureForwardUrl("/loginForm");
 
+        //로그아웃 관련 Security 설정
+        http.logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/main");
+
+
+        //인증된 회원 정보를 사용하기 위해 UserDetails를 사용
         http.
         userDetailsService((UserDetailsService)userDetailImpl);
+        
    
     }
 

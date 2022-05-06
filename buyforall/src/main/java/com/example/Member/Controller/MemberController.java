@@ -131,7 +131,7 @@ public class MemberController {
         model.addAttribute("member", member);
 
         model.addAttribute("content","/main");
-        return "/templates";
+        return "/templates";  
 
     }
 }
