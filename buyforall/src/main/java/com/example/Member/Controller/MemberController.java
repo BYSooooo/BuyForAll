@@ -8,8 +8,10 @@ import javax.validation.Valid;
 import com.example.Mail.Service.MailService;
 import com.example.Member.Service.MemberService;
 import com.example.Member.Vo.MemberVo;
+import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -120,6 +122,17 @@ public class MemberController {
             model.addAttribute("content", "/views/member/joinComplete");
         }
         return "/templates";
+    }   
+
+    //로그인이 성공 했을 경우 실행할 작업
+    @RequestMapping(value="/loginSuccess", method = RequestMethod.POST)
+    public String loginSuccess(@AuthenticationPrincipal SecMemberVo member, Model model) {
+        //회원 정보를 View로 전달한다.
+        model.addAttribute("member", member);
+
+        model.addAttribute("content","/main");
+        return "/templates";  
+
     }
 }
 
