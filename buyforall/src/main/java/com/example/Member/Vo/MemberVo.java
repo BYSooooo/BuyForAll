@@ -10,9 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 //회원 정보를 담는 Vo Class
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class MemberVo {
     
     @NotNull(message = "아이디는 필수 항목입니다.")

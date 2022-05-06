@@ -8,13 +8,16 @@ import javax.validation.Valid;
 import com.example.Mail.Service.MailService;
 import com.example.Member.Service.MemberService;
 import com.example.Member.Vo.MemberVo;
+import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -120,6 +123,15 @@ public class MemberController {
             model.addAttribute("content", "/views/member/joinComplete");
         }
         return "/templates";
+    }
+
+    @RequestMapping(value="/loginSuccess", method = RequestMethod.POST)
+    public String loginSuccess(@AuthenticationPrincipal SecMemberVo member, Model model) {
+        System.out.println(member.getUsername());
+
+        model.addAttribute("content","/main");
+        return "/templates";
+
     }
 }
 

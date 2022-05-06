@@ -26,6 +26,11 @@ public class MemberDaoImpl implements MemberDao {
         this.session.selectOne("Member.insertMember", member);
     }
 
+    @Override
+    public MemberVo getMemberByID (String memberId) {
+        return this.session.selectOne("Member.getMemberInfoById", memberId);
+    }
+
     
     
     

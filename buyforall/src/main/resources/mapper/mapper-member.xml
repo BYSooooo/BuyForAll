@@ -14,7 +14,7 @@
     <select id="checkId" parameterType="string" resultType="int">
         SELECT COUNT(*)
         FROM Member
-        WHERE MemberId = #{MemberId}
+        WHERE memberId = #{MemberId}
     </select>
 
     
@@ -23,6 +23,29 @@
         INSERT INTO Member( memberId, memberPwd, memberName, memberEmail, memberGrade, postNumber, memberAddress, joinDate )
         VALUES( #{memberId}, #{password}, #{memberName}, #{memberEmail}, #{memberGrade}, #{postNumber}, #{memberAddress}, #{joinDate} )
     </insert>
+
+    <!-- 로그인 중 회원 정보를 Vo 객체에 담기 위한 ResultMap -->
+    <resultMap id="memberVoResult" type="MemberVo">
+        <id property="memberId" javaType="string" jdbcType="VARCHAR" column="memberId" />
+        <id property="password" javaType="string" jdbcType="VARCHAR" column="memberPwd" />
+        <id property="memberName" javaType="string" jdbcType="VARCHAR" column="memberName" />
+        <id property="memberEmail" javaType="string" jdbcType="VARCHAR" column="memberEmail" />
+        <id property="memberGrade" javaType="string" jdbcType="VARCHAR" column="memberGrade" />
+        <id property="postNumber" javaType="string" jdbcType="VARCHAR" column="postNumber" />
+        <id property="memberAddress" javaType="string" jdbcType="VARCHAR" column="memberAddress" />
+        <id property="lastLogin" javaType="string" jdbcType="VARCHAR" column="lastLogin" />
+        <id property="amountBuyingPrice" javaType="int" jdbcType="INTEGER" column="amountBuying" />
+        <id property="joinDate" javaType="string" jdbcType="VARCHAR" column="joinDate" />
+    </resultMap>
+
+    <!-- 로그인 중 아이디로 나머지 정보를 반환-->
+    <select id="getMemberInfoById" parameterType="string" resultType="MemberVo" resultMap="memberVoResult">
+        SELECT memberId, memberPwd, memberName, memberEmail, memberGrade, postNumber, memberAddress, lastLogin, amountBuying, joinDate
+        FROM Member
+        WHERE memberId = #{memberId}
+
+
+    </select>
 
 
 </mapper>
