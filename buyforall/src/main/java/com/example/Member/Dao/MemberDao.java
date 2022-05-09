@@ -1,5 +1,7 @@
 package com.example.Member.Dao;
 
+import java.util.Map;
+
 import com.example.Member.Vo.MemberVo;
 
 public interface MemberDao {
@@ -11,5 +13,7 @@ public interface MemberDao {
     public void insertMemberDB(MemberVo member);
     // 로그인 과정에서 회원 아이디로 DB에서 나머지 정보 요청
     public MemberVo getMemberByID (String memberId);
+    // 로그인 과정에서 최종 로그인 일자 변경
+    public void updateLoginTime (Map<String,String> map);
     
 }

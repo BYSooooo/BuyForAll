@@ -36,7 +36,8 @@ public class MemberVo {
     String memberGrade; //회원 등급(Security Role)
     String postNumber;  // 회원 주소의 우편번호
     String memberAddress;   //회원 주소
-    
+    String memberPhoto; //회원 프로필 사진
+
     String lastLogin;   //마지막 로그인
     int amountBuyingPrice;  //총 구매 금액
     String joinDate;    //가입일

@@ -6,10 +6,11 @@ xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 >
+
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/header.css}" />
-    
 </th:block>
+<th:block layout:fragment="header">
 
 
 <!-- 헤더 전체 div-->
@@ -42,10 +43,40 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
                 <a sec:authroize="isAnonymous()" th:href="@{/loginForm}">
                     <img th:unless="${member}" id="loginIcon" th:src="@{/images/user.png}" >
                 </a>
-                <span  sec:authorize="isAuthenticated()" th:text="${member.getMember().getMemberName() + '님 반갑습니다.'}"></span>
-            
-            
+                <span type="button" sec:authorize="isAuthenticated()" data-bs-toggle="offcanvas" data-bs-target="#sideBar" th:text="${member.getMember().getMemberName() + '님 반갑습니다.'}"></span>
                 <img id="shoppingCart" th:src="@{/images/shopping-cart.png}" />
+        </div>
+        <!-- OffCanvas 구현부분-->
+        <div class="offcanvas offcanvas-start" id="sideBar" sec:authorize="isAuthenticated()">
+            <div class="offcanvas-header">
+                <h1 class="offcanvas-title"> 마이페이지 </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div id="profilePhoto">
+                    <img id="myPhoto" th:unless="${member.getMember().getMemberPhoto()}" th:src="@{/images/person.png}" >
+                    <div th:text="${member.getMember().getMemberName}"></div>
+                    <div id="lastLoginText"th:text="'최종로그인 : ' + ${member.getMember().getLastLogin()}"></div>
+                </div>
+
+                <table class="table" id="memberInfo">
+                    <tr>
+                        <td>ID</td>
+                        <td th:text="${member.getMember().getMemberId()}"></td>
+                    </tr>
+                    <tr>
+                        <td>주소지</td>
+                        <td th:if="${member.getMember().getMemberAddress() == ''}" th:text="${member.getMember().getMemberAddress()}"></td>
+                        <td th:unless="${member.getMember().getMemberAddress() == ''}">설정하지 않았습니다.</td>
+                    </tr>
+                </table>
+                <div id="buttonGroup">
+                    <button class="btn btn-secondary" type="button">회원정보수정</button>
+                    <a class="btn btn-secondary" type="button" th:href="@{/logout}">로그아웃</a>
+
+                </div>
+                
+            </div>
         </div>
     </div>
     <!-- 헤더 하단 카테고리 표시 부분 -->

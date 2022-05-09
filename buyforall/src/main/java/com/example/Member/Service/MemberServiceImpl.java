@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.example.Member.Dao.MemberDao;
 import com.example.Member.Vo.MemberVo;
+import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,6 +57,19 @@ public class MemberServiceImpl implements MemberService {
         String formattedTime = nowTime.format(formatter);
         member.setJoinDate(formattedTime);
         memberDao.insertMemberDB(member);
+    }
+    @Override
+    public void updateLastLogin(SecMemberVo member) {
+        // 현재 시간을 클라이언트 기준으로 측정해서 변수 선언
+        LocalDateTime loginTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTime = loginTime.format(formatter);
+
+        //아이디와 로그인 일자를 담은 Map 객체 선언
+        Map<String, String> map = new HashMap<String,String>();
+        map.put("memberId", member.getMember().getMemberId());
+        map.put("lastLogin", formattedTime);
+        memberDao.updateLoginTime(map);
     }
 
 }

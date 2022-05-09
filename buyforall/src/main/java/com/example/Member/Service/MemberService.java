@@ -3,6 +3,7 @@ package com.example.Member.Service;
 import java.util.Map;
 
 import com.example.Member.Vo.MemberVo;
+import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.validation.BindingResult;
 
@@ -16,4 +17,6 @@ public interface MemberService {
     public Map <String,String> validate(BindingResult bindingResult);
     //가입 과정에서 입력된 회원 정보를 DB에 입력
     public void insertMember(MemberVo member);
+    //로그인 시 최종 로그인 일자를 수정
+    public void updateLastLogin(SecMemberVo member);
 }

@@ -43,9 +43,14 @@
         SELECT memberId, memberPwd, memberName, memberEmail, memberGrade, postNumber, memberAddress, lastLogin, amountBuying, joinDate
         FROM Member
         WHERE memberId = #{memberId}
-
-
     </select>
+
+    <!-- 로그인 중 최종 로그인 일자를 변경 -->
+    <update id="insertLastLogin" parameterType="hashMap">
+        UPDATE Member
+        SET lastLogin = #{lastLogin}
+        WHERE memberId = #{memberId}
+    </update>
 
 
 </mapper>
