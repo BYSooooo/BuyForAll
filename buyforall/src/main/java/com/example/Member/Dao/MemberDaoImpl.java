@@ -1,5 +1,7 @@
 package com.example.Member.Dao;
 
+import java.util.Map;
+
 import com.example.Member.Vo.MemberVo;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,6 +31,17 @@ public class MemberDaoImpl implements MemberDao {
     @Override
     public MemberVo getMemberByID (String memberId) {
         return this.session.selectOne("Member.getMemberInfoById", memberId);
+    }
+    
+    @Override
+    public void updateLoginTime (Map<String,String> map) {
+        this.session.update("Member.insertLastLogin",map);
+    }
+
+    @Override
+    public String getIdbyEmail(String memberEmail) {        
+        var result = this.session.selectOne("Member.getIdByEmail",memberEmail);
+        return result == null ? "null" : result.toString();
     }
 
     

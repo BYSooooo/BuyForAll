@@ -126,14 +126,36 @@ public class MemberController {
 
     //로그인이 성공 했을 경우 실행할 작업
     @RequestMapping(value="/loginSuccess", method = RequestMethod.POST)
-    public String loginSuccess(@AuthenticationPrincipal SecMemberVo member, Model model) {
+    public String loginSuccess(@AuthenticationPrincipal SecMemberVo member, Model model) {        
+        //최종 로그인 일자를 수정한다.
+        memberService.updateLastLogin(member);
         //회원 정보를 View로 전달한다.
         model.addAttribute("member", member);
-
         model.addAttribute("content","/main");
         return "/templates";  
 
     }
+    
+    //아이디, 비밀번호 찾기 페이지로 이동
+    @GetMapping("/forgetInfo")
+    public String forgetInfoPage(Model model) {
+        model.addAttribute("content", "/views/member/forgetInfo");
+        return "/templates";
+    }
+
+    //이메일로 아이디 찾기
+    @RequestMapping(value="/searchIdForEmail", method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> EmailForId(@RequestParam("memberEmail") String memberEmail) {
+        //DB에서 이메일로 아이디 값을 반환
+       String resultId = memberService.selectEmailForId(memberEmail);
+       //ajax로 되돌려주기 위한 Map 선언
+       Map<String,Object> map = new HashMap<String,Object>();
+       map.put("result", resultId);
+       return map;
+    }
+    
+    
+    
 }
 
 

@@ -29,12 +29,29 @@
     width: 20%
 }
 
-
 /* 링크 이미지 크기 조정 */
 #loginIcon, #shoppingCart {
     width: 50px;
     height: auto;
 }
 
+/* 마이페이지 프로필 사진 상위 div */
+#profilePhoto {
+    text-align: center;
+}
+
+/* 마이페이지 프로필 사진 */
+#myPhoto {
+    width: 100px;
+    height: auto;
+    border: 2px black solid;
+    border-radius: 50%;
+}
+
+/* 마지막 로그인 텍스트 디자인 */
+#lastLoginText {
+    color: gray;
+    font-size: small;
+}
 
 

@@ -23,3 +23,13 @@
 #joinMember {
     float: right;
 }
+/* 아이디 비밀번호 찾기 페이지 외부 div */
+#forgetDiv {
+    padding-top: 2em;
+}
+/* 아이디, 비밀번호 찾기 페이지 이동 div */
+#forgetText {
+    float:right;
+    font-size: small;
+
+}

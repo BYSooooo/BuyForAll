@@ -1,0 +1,26 @@
+/* 전체 div 디자인 기본 설정 */
+#forgetContainer {
+    /* 기본 디자인 및 여백 설정 */
+    width: 70%;
+    max-width: 550px;
+    background-color: rgb(230, 230, 230);
+    margin: 1em auto 1em auto;
+    padding: 2em; 
+    border-radius: 1em;
+}
+
+/* 각 input 창 div class */
+.inputForForget {
+    margin: 1em 0 1em 0 ;
+}
+
+/* 아이디 찾기 설명 Text */
+.forgetInfoText {
+    font-size: small;
+    color: brown;
+}
+
+/* 찾기 버튼 div */
+.d-grid {
+    margin-top: 1em;
+}

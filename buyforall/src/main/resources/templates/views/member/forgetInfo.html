@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{css/member/forgetInfo.css}" />
+    </th:block>
+    <th:block layout:fragment="script">
+        <script th:src="@{/javascript/member/forgetInfo.js}" ></script>
+    </th:block>
+
+    <div id="forgetContainer" class="container">
+        <div id="mainForget">
+            <div class="forget_Title">
+                <h3 class="form-signin-heading">아이디 찾기</h3>
+            </div>
+            <div id="forgetId" class="inputForForget">
+                <div class="forgetInfoText">
+                    아이디를 찾기위해 가입 당시 입력한 이메일을 입력하세요.
+                </div>
+                <label for="inputEmailForEmail">Email</label>
+                <input type="text" class="form-control" id="inputEmailForEmail" name="inputEmailForEmail" placeholder="가입 당시 사용한 이메일을 입력하세요." />
+                <div class="d-grid">
+                    <button type="button" class="btn btn-primary btn-block" id="EmailForSearchId" name="EmailForSearchId" data-bs-toggle="modal" data-bs-target="#searchIdModal">찾기</button>
+                </div>
+
+            </div>
+            <div class="forget_Title">
+                <h3 class="form-signin-heading">비밀번호 찾기</h3>
+            </div>
+            <div id="forgetPwd" class="inputForForget">
+                <div class="forgetInfoText">
+                    비밀번호를 찾기 위해 아이디와 가입 당시 사용한 이메일을 입력하세요.<br>
+                    입력하신 이메일로 임시 비밀번호가 발급됩니다.<br>
+                </div>
+                <label for="inputIdForPwd">ID</label>
+                <input type="text" class="form-control" id="inputIdForPwd" name="inputIdForPwd" placeholder="아이디를 입력하세요.">
+                <lebel for="inputEmailForPwd">Email</lebel>
+                <input type="text" class="form-control" id="inputEmailForPwd" name="inputEmailForPwd" placeholder="이메일을 입력하세요.">
+                <div class="d-grid">
+                    <button type="button" class="btn btn-primary btn-block" id="EmailIdForSearchPwd" name="EmailIdForSearchPwd">찾기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 아이디 찾기 결과 값을 표시하기 위한 Modal Div -->
+    <div class="modal fade" id="searchIdModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> 아이디 찾기 결과</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    검색 결과 : <span id="resultText" name="resultText"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+</html>
