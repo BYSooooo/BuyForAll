@@ -71,5 +71,16 @@ public class MemberServiceImpl implements MemberService {
         map.put("lastLogin", formattedTime);
         memberDao.updateLoginTime(map);
     }
+    @Override
+    public String selectEmailForId(String memberEmail) {
+        String searchId = memberDao.getIdbyEmail(memberEmail);
+        String searchResult = "";
+        if(searchId != "null") {
+            searchResult = searchId;
+        } else {
+            searchResult = "일치하는 이메일이 없습니다.";
+        }
+        return searchResult;
+    }
 
 }

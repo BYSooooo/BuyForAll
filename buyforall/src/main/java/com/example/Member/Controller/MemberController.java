@@ -135,6 +135,27 @@ public class MemberController {
         return "/templates";  
 
     }
+    
+    //아이디, 비밀번호 찾기 페이지로 이동
+    @GetMapping("/forgetInfo")
+    public String forgetInfoPage(Model model) {
+        model.addAttribute("content", "/views/member/forgetInfo");
+        return "/templates";
+    }
+
+    //이메일로 아이디 찾기
+    @RequestMapping(value="/searchIdForEmail", method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> EmailForId(@RequestParam("memberEmail") String memberEmail) {
+        //DB에서 이메일로 아이디 값을 반환
+       String resultId = memberService.selectEmailForId(memberEmail);
+       //ajax로 되돌려주기 위한 Map 선언
+       Map<String,Object> map = new HashMap<String,Object>();
+       map.put("result", resultId);
+       return map;
+    }
+    
+    
+    
 }
 
 

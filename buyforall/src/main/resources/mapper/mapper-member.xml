@@ -52,5 +52,12 @@
         WHERE memberId = #{memberId}
     </update>
 
+    <!-- 이메일 값으로 아이디 찾아서 반환 -->
+    <select id="getIdByEmail" parameterType="string" resultType="string">
+        SELECT memberId
+        FROM Member
+        WHERE memberEmail = #{memberEmail}
+    </select>
+
 
 </mapper>

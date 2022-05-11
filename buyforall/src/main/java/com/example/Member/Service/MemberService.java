@@ -17,6 +17,8 @@ public interface MemberService {
     public Map <String,String> validate(BindingResult bindingResult);
     //가입 과정에서 입력된 회원 정보를 DB에 입력
     public void insertMember(MemberVo member);
-    //로그인 시 최종 로그인 일자를 수정
+    //로그인 과정에서 최종 로그인 일자를 수정
     public void updateLastLogin(SecMemberVo member);
+    //아이디 찾기 과정에서 이메일 값으로 아이디 반환
+    public String selectEmailForId(String memberEmail);
 }

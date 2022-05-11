@@ -38,6 +38,12 @@ public class MemberDaoImpl implements MemberDao {
         this.session.update("Member.insertLastLogin",map);
     }
 
+    @Override
+    public String getIdbyEmail(String memberEmail) {        
+        var result = this.session.selectOne("Member.getIdByEmail",memberEmail);
+        return result == null ? "null" : result.toString();
+    }
+
     
     
     

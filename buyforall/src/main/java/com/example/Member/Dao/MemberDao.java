@@ -15,5 +15,7 @@ public interface MemberDao {
     public MemberVo getMemberByID (String memberId);
     // 로그인 과정에서 최종 로그인 일자 변경
     public void updateLoginTime (Map<String,String> map);
+    // 아이디 찾기 과정에서 이메일로 아이디 찾기
+    public String getIdbyEmail(String memberEmail);
     
 }
