@@ -14,7 +14,6 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private MailDao mailDao;
 
-    // 회원 가입 과정 중 인증 메일 발송을 위한 MailVo 객체 내용 작성
     @Override
     public void createSendMail(String memberEmail, String veriNum) {
         MailVo sendMail = new MailVo();
@@ -24,7 +23,6 @@ public class MailServiceImpl implements MailService {
 
         this.mailDao.sendVerifyMail(sendMail);
     }
-    // 가임 중 인증에 필요한 랜덤 번호 생성
     @Override
     public String createRandomNumber() {
         
@@ -44,6 +42,16 @@ public class MailServiceImpl implements MailService {
         createdVerifyNum += numIndex;
         // 반환
         return createdVerifyNum;
+    }
+    @Override
+    public void createMailForPwd(String memberEmail, String tempPwd) {
+        
+        MailVo sendEmail = new MailVo();
+
+        sendEmail.setMailAddress(memberEmail);
+        sendEmail.setMailTitle("BuyForAll의 임시 비밀번호 발급 이메일입니다.");
+        sendEmail.setMailContext("임시 비밀번호는 " + tempPwd +" 입니다.");
+        this.mailDao.sendVerifyMail(sendEmail);
     }
 
 

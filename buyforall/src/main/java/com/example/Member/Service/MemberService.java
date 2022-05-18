@@ -21,4 +21,8 @@ public interface MemberService {
     public void updateLastLogin(SecMemberVo member);
     //아이디 찾기 과정에서 이메일 값으로 아이디 반환
     public String selectEmailForId(String memberEmail);
+    //비밀번호 찾기 과정에서 아이디, 이메일로 일치 여부 체크
+    public int checkIdAndEmail(String memberId, String memberEmail);
+    //비밀번호 찾기 과정에서 임시 비밀번호로 DB 업데이트
+    public void modifyPwd(String memberEmail, String tempPwd);
 }

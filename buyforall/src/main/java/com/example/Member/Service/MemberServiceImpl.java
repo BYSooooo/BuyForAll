@@ -82,5 +82,21 @@ public class MemberServiceImpl implements MemberService {
         }
         return searchResult;
     }
+    @Override
+    public int checkIdAndEmail(String memberId, String memberEmail) {
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("memberId", memberId);
+        map.put("memberEmail", memberEmail);
+        //DB에 쿼리 전송 후 일치하면 정보가 있으면 1, 없으면 0
+        return memberDao.checkMemberInfoForPwd(map);
+    }
+    @Override
+    public void modifyPwd(String memberEmail, String tempPwd) {
+        String cryptoTempPwd = passwordEncoder.encode(tempPwd);
+        Map<String,String> map = new HashMap<>();
+        map.put("memberEmail", memberEmail);
+        map.put("memberPwd", cryptoTempPwd);
+        memberDao.updateTempPwd(map);
+    }
 
 }

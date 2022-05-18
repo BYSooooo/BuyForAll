@@ -39,7 +39,7 @@
                 <lebel for="inputEmailForPwd">Email</lebel>
                 <input type="text" class="form-control" id="inputEmailForPwd" name="inputEmailForPwd" placeholder="이메일을 입력하세요.">
                 <div class="d-grid">
-                    <button type="button" class="btn btn-primary btn-block" id="EmailIdForSearchPwd" name="EmailIdForSearchPwd">찾기</button>
+                    <button type="button" class="btn btn-primary btn-block" id="EmailIdForSearchPwd" name="EmailIdForSearchPwd" data-bs-toggle="modal" data-bs-target="#searchPwdModal">찾기</button>
                 </div>
             </div>
         </div>
@@ -54,6 +54,23 @@
                 </div>
                 <div class="modal-body">
                     검색 결과 : <span id="resultText" name="resultText"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 임시 비밀번호 발급 결과를 표시하기 위한 Modal Div -->
+    <div class="modal fade" id="searchPwdModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">임시 비밀번호 발급</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <span id="resultText2" name="resultText2"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
