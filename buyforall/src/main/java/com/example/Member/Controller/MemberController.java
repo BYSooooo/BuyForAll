@@ -157,14 +157,13 @@ public class MemberController {
     //임시 비밀번호 발급
     @RequestMapping(value="/searchPwd", method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> searchPwd(@RequestParam("memberId") String memberId, @RequestParam("memberEmail") String memberEmail) {
-        System.out.println(memberId);
-        System.out.println(memberEmail);
         Map<String,Object> map = new HashMap<>();
         //DB에 일치하는 값이 있는지 확인
         int resultCheckDB = memberService.checkIdAndEmail(memberId,memberEmail);
         //일치하는 값이 있을 경우 임시 비밀번호 생성/메일 발송/DB 업데이트
         if(resultCheckDB == 1) {
             String tempPwd = mailService.createRandomNumber();
+            System.out.println("임시 비밀번호 : "+tempPwd);
             mailService.createMailForPwd(memberEmail, tempPwd);
             memberService.modifyPwd(memberEmail,tempPwd);
             map.put("result2", "입력하신 이메일로 임시 비밀번호가 발송되었습니다.");
