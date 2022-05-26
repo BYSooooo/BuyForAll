@@ -1,0 +1,15 @@
+/* 회원 정보 수정 폼 기본 div */
+.modifyFormLayout {
+    /* 기본 디자인 및 여백 설정 */
+    width: 70%;
+    max-width: 550px;
+    background-color: rgb(230, 230, 230);
+    margin: 1em auto 1em auto;
+    padding: 2em; 
+    border-radius: 1em;
+}
+/* 회원 정보 설명 */
+#modifyComment {
+    font-size: small;
+    color:brown;
+}

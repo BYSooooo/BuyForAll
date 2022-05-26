@@ -173,6 +173,16 @@ public class MemberController {
         }
         return map;
     }
+
+    //회원 정보 수정 페이지로 이동 시 작업
+    @RequestMapping(value="/goModify", method=RequestMethod.GET)
+    public String goModify(@AuthenticationPrincipal SecMemberVo member, Model model) {
+        model.addAttribute("member", member);
+        System.out.println(member); 
+        model.addAttribute("content", "/views/member/modifyInfo");
+        return "/templates";
+    }
+    
     
 }
 
