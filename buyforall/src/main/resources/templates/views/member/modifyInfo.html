@@ -21,17 +21,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     수정 후 확인 버튼을 누르면 완료됩니다.
                 </div>
                 <div id="EmailAndPw">
-                    <label for="memberId">ID(변경할 수 없습니다.)</label>
-                    <input type="text" class="form-control form-control-sm" id="memberId" name="memberId" th:value="${member.getMember().getMemberId()}" readonly>
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="영문 대소문자/숫자/특수문자를 포함한 10~20자">
-                    <div id="checkPwResult" name="checkPwResult" th:text="${valid_password}"></div>
-                    <label for="memberEmail">Email</label>
-                    <input type="text" class="form-control form-control-sm" id="memberEmail" name="memberEmail" th:value="${member.getMember().getMemberEmail()}" readonly></div>
-                    <div id="verifyEmail" name="verifyEmail">
-                        <span>이메일 변경을 위해서는 재인증이 필요합니다.</span>
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#emailModal">재인증</button>
+                    <div class="inputCustomClass">
+                        <label for="memberId">ID</label>
+                        <input type="text" class="form-control form-control-sm" id="memberId" name="memberId" th:value="${member.getMember().getMemberId()}" readonly>
+                        <div id="idText">아이디는 변경할 수 없습니다.</div>
                     </div>
+                    <div class="inputCustomClass">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="영문 대소문자/숫자/특수문자를 포함한 10~20자">
+                        <div id="checkPwResult" name="checkPwResult" th:text="${valid_password}"></div>
+                    </div>
+                    <div class="inputCustomClass">
+                        <label for="memberEmail">Email</label>
+                        <input type="text" class="form-control form-control-sm" id="memberEmail" name="memberEmail" th:value="${member.getMember().getMemberEmail()}" readonly></div>
+                        <div id="verifyEmail" name="verifyEmail">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#emailModal">재인증</button>
+                            <span id="emailText" name="emailText">이메일 변경을 위해서는 재인증이 필요합니다.</span>
+                        </div>
+                    </div>
+
+                    
+                    
 
 
                     
@@ -55,7 +65,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                         <labal for="inputEmail">사용하려는 이메일을 입력하세요.</labal>
                         <input type="text" class="form-control form-control-sm" id="inputEmail" name="inputEmail" placeholder="Example@email.com">
                         <button type="button" class="btn btn-primary btn-sm" id="sendVeriNum" name="sendVeriNum">인증번호전송</button>
-                        <div id="checkInputEmailDB" name="checkInputEmailDB"><br></div>
+                        <span id="checkInputEmailDB" name="checkInputEmailDB"><br></span>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -79,7 +89,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                         이메일이 발송되지 않았거나 다른 이메일을 사용하고 싶다면 <br>
                         '이전' 버튼을 클릭해서 인증 절차를 다시 진행해주세요.
                     </div>
-                    <div id="inputVeriNum">
+                    <div id="inputVeriNumDiv">
                         <label for="inputVerifyNum">인증번호입력</label>
                         <input type="text" class="form-control form-control-sm" id="inputVeriNum" name="inputVeriNum" placeholder="인증번호를 입력하세요.">
                         <div id="resultCheckNum" name="resultCheckNum"></div> 
@@ -87,7 +97,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                 </div>
                 <div class="modal-footer">
                     <button id="returnModal" name="returnModal" class="btn btn-secondary" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#emailModal" >이전</button>
-                    <button id="veriComplete" name="veriComplete" class="btn-btn-primary" dats-bs-dismiss="modal" disabled>변경 완료</button>
+                    <button id="veriComplete" name="veriComplete" class="btn-btn-primary" data-bs-dismiss="modal" disabled>변경 완료</button>
                 </div>
             </div>
         </div>

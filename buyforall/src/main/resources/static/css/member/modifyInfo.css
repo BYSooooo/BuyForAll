@@ -12,4 +12,15 @@
 #modifyComment {
     font-size: small;
     color:brown;
+    margin-bottom: 2em;
+}
+/* 각 입력 input Div 개별 디자인 */
+.inputCustomClass {
+    margin: 0.5em auto 0.5em auto;
+}
+
+/* IdInput / Email input 하단 안내 메시지 */
+#emailText, #idText {
+    font-size: small;
+    color: brown;
 }

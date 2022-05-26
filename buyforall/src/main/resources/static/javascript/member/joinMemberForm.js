@@ -43,7 +43,8 @@ window.onload = function () {
 
     /* 가입 과정 중 인증번호 일치 여부에 따른 버튼 활성/비활성 */
     inputVeriNum.addEventListener('keyup',() => {
-        if(verifyNumber === inputVeriNum.value) {
+        var verifyNum2 = verifyNumber;
+        if(verifyNum2 === inputVeriNum.value) {
             document.getElementById('nextButton').disabled=false;
             checkNumResult.innerText = "인증번호가 일치합니다."
         } else {
