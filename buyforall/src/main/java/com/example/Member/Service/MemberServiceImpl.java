@@ -10,8 +10,13 @@ import com.example.Member.Vo.MemberVo;
 import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -23,6 +28,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private final AuthenticationManager authenticationManager;
+
+    @Autowired 
+    public MemberServiceImpl(AuthenticationManager authenticationManager) {
+        this. authenticationManager = authenticationManager;
+    }
+
+    
     
     @Override
     public int checkEmail(String memberEmail) {
@@ -98,12 +112,17 @@ public class MemberServiceImpl implements MemberService {
         map.put("memberPwd", cryptoTempPwd);
         memberDao.updateTempPwd(map);
     }
+    @Transactional
     @Override
     public void updateMember(MemberVo updateMember) {
         //비밀번호 암호화
         updateMember.setPassword(passwordEncoder.encode(updateMember.getPassword()));
         //회원 정보 Dao에 전달
         memberDao.reWriteMemberInfo(updateMember);
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(updateMember.getMemberId(), updateMember.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
     }
 
 }

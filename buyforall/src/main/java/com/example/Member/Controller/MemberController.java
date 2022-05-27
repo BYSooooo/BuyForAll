@@ -212,11 +212,12 @@ public class MemberController {
             model.addAttribute("content", "/views/member/modifyInfo");
             
         } else {
-            //이상이 없다면 update 절차 진행
             //주소지 형식에 맞게 객체에 적용
             newMemberInfo.setMemberAddress(memberAddress);
             newMemberInfo.setMemberAddress2(memberAddress2);
+            //이상이 없다면 update 절차 진행
             memberService.updateMember(newMemberInfo);
+
             model.addAttribute("member",originMemberInfo);
             model.addAttribute("content","/main");
 
