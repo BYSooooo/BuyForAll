@@ -51,4 +51,8 @@ public class MemberDaoImpl implements MemberDao {
     public void updateTempPwd(Map<String,String> map) {
         this.session.update("Member.updateTempPwd", map);
     }
+    @Override
+    public void reWriteMemberInfo(MemberVo member) {
+        this.session.update("Member.updateMember",member);   
+    }
 }

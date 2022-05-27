@@ -98,5 +98,12 @@ public class MemberServiceImpl implements MemberService {
         map.put("memberPwd", cryptoTempPwd);
         memberDao.updateTempPwd(map);
     }
+    @Override
+    public void updateMember(MemberVo updateMember) {
+        //비밀번호 암호화
+        updateMember.setPassword(passwordEncoder.encode(updateMember.getPassword()));
+        //회원 정보 Dao에 전달
+        memberDao.reWriteMemberInfo(updateMember);
+    }
 
 }

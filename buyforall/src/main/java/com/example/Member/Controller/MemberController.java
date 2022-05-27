@@ -115,9 +115,9 @@ public class MemberController {
             
         } else {
             //Validation 문제가 없다면 DB에 저장 단계로 진행
-            //검색 주소와 나머지 주소를 합쳐서 주소를 만듦
-            String fullAddress = roadAddress + " " + extrAddress;
-            member.setMemberAddress(fullAddress);
+            //검색 주소와 나머지 주소를 각각 입력
+            member.setMemberAddress(roadAddress);
+            member.setMemberAddress2(extrAddress);
             memberService.insertMember(member);
             model.addAttribute("content", "/views/member/joinComplete");
         }
@@ -183,6 +183,47 @@ public class MemberController {
         return "/templates";
     }
     
+    //회원 정보 수정 
+    @RequestMapping(value="/updateInfo", method = RequestMethod.POST)
+    public String updateMemberInfo(@Valid @ModelAttribute MemberVo newMemberInfo, @AuthenticationPrincipal SecMemberVo originMemberInfo, BindingResult bindingResult,
+                                    @RequestParam("roadAddress") String memberAddress,  @RequestParam("extrAddress") String memberAddress2, Model model) {
+        //Vo 클래스의 Validation을 거치지 못했을 경우
+        if (bindingResult.hasErrors()) {
+            //Validation 에러 내용을 가져와서 반환
+            Map<String,String> map = memberService.validate(bindingResult);
+            for(String key: map.keySet()) {
+                model.addAttribute(key, map.get(key));  
+            }
+            //Validaion에 사용했던 값들 View로 다시 반환
+            //회원 정보 수정 페이지에서 사용하는 SecMemberVo 객체로 반환하기 위해 새로운 Vo 생성
+            MemberVo tempMemberInfo = new MemberVo();
+            //변경되지 않는 정보는 인증 정보로 등록된 회원 정보에서 바로 가져옴
+            tempMemberInfo.setMemberId(originMemberInfo.getMember().getMemberId());
+            //변경 가능한 정보는 회원정보 수정 페이지에 입력한 내용 그대로 반환되도록 Vo 객체 채움
+            tempMemberInfo.setMemberEmail(newMemberInfo.getMemberEmail());
+            tempMemberInfo.setMemberName(newMemberInfo.getMemberName());
+            tempMemberInfo.setPostNumber(newMemberInfo.getPostNumber());
+            tempMemberInfo.setMemberAddress(newMemberInfo.getMemberAddress());
+            tempMemberInfo.setMemberAddress2(newMemberInfo.getMemberAddress2());
+            
+            //회원정보 수정 페이지에서 사용 가능한 형태로 반환
+            SecMemberVo returnMember = new SecMemberVo(tempMemberInfo, originMemberInfo.getAuthorities());
+            model.addAttribute("member", returnMember);
+            model.addAttribute("content", "/views/member/modifyInfo");
+            
+        } else {
+            //이상이 없다면 update 절차 진행
+            //주소지 형식에 맞게 객체에 적용
+            newMemberInfo.setMemberAddress(memberAddress);
+            newMemberInfo.setMemberAddress2(memberAddress2);
+            memberService.updateMember(newMemberInfo);
+            model.addAttribute("member",originMemberInfo);
+            model.addAttribute("content","/main");
+
+        }
+        
+        return "/templates";
+    }
     
 }
 

@@ -1,10 +1,12 @@
 package com.example.Member.Service;
 
+import java.util.Collection;
 import java.util.Map;
 
 import com.example.Member.Vo.MemberVo;
 import com.example.Member.Vo.SecMemberVo;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.validation.BindingResult;
 
 public interface MemberService {
@@ -25,4 +27,6 @@ public interface MemberService {
     public int checkIdAndEmail(String memberId, String memberEmail);
     //비밀번호 찾기 과정에서 임시 비밀번호로 DB 업데이트
     public void modifyPwd(String memberEmail, String tempPwd);
+    //회원 정보 수정
+    public void updateMember(MemberVo updateMember);
 }

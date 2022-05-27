@@ -21,4 +21,6 @@ public interface MemberDao {
     public int checkMemberInfoForPwd(Map<String,String> map);
     // 임시 비밀번호 발급 과정에서 암호화된 Pwd로 DB업데이트
     public void updateTempPwd(Map<String,String> map);
+    // 회원 정보 수정
+    public void reWriteMemberInfo(MemberVo member);
 }
