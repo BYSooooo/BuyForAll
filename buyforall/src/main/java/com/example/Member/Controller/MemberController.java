@@ -11,7 +11,12 @@ import com.example.Member.Vo.MemberVo;
 import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +35,9 @@ public class MemberController {
     @Autowired
     public MailService mailService;
     
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     //로그인 폼으로 이동
     @GetMapping("/loginForm")
     public String goLoginForm(Model model) {
@@ -218,8 +226,11 @@ public class MemberController {
             //이상이 없다면 update 절차 진행
             memberService.updateMember(newMemberInfo);
 
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(originMemberInfo.getUsername(),originMemberInfo.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
             model.addAttribute("member",originMemberInfo);
-            model.addAttribute("content","/main");
+            model.addAttribute("content","/views/member/modifyInfo");
 
         }
         

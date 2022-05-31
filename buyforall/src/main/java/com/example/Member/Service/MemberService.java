@@ -1,12 +1,10 @@
 package com.example.Member.Service;
 
-import java.util.Collection;
 import java.util.Map;
 
 import com.example.Member.Vo.MemberVo;
 import com.example.Member.Vo.SecMemberVo;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.validation.BindingResult;
 
 public interface MemberService {
