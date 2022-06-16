@@ -10,6 +10,10 @@ import com.example.Member.Vo.MemberVo;
 import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +28,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     
     @Override
     public int checkEmail(String memberEmail) {
@@ -99,16 +107,30 @@ public class MemberServiceImpl implements MemberService {
         map.put("memberPwd", cryptoTempPwd);
         memberDao.updateTempPwd(map);
     }
-    @Transactional
+
     @Override
+    @Transactional
     public void updateMember(MemberVo updateMember) {
-        System.out.println(updateMember.getMemberName());
-        //비밀번호 암호화
+        //Dirty Checking을 통한 자동 commit, update를 위해 Repository를 통해 DB에서 수정 전 정보를 가져옴
+        MemberVo modifiedMember = memberDao.getMemberByID(updateMember.getMemberId());
+
+        //매개변수로 입력받은 새로운 비밀번호 암호화
         String encodePwd = passwordEncoder.encode(updateMember.getPassword());
-        updateMember.setPassword(encodePwd);
-        //회원 정보 Dao에 전달
-        memberDao.reWriteMemberInfo(updateMember);
+        modifiedMember.setPassword(encodePwd);
+        // 그 외 나머지 정보들 새로운 Vo 객체에 적용
+        modifiedMember.setMemberName(updateMember.getMemberName());
+        modifiedMember.setMemberEmail(updateMember.getMemberEmail());
+        modifiedMember.setMemberAddress(updateMember.getMemberAddress());
+        modifiedMember.setMemberAddress2(updateMember.getMemberAddress2());
+        modifiedMember.setPostNumber(updateMember.getPostNumber());
+        //Transaction을 통해 Vo 객체의 변경이 발생하면 DirtyChecking 작동 -> 자동 Commit
         
+        // //회원 정보 Dao에 전달
+        // memberDao.reWriteMemberInfo(updateMember);
+
+        // 로그아웃 없이 인증정보를 변경하기 위해 새로운 인증 Token 생성
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(updateMember.getMemberId(),updateMember.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
 }
