@@ -190,6 +190,7 @@ public class MemberController {
                                     @RequestParam("roadAddress") String memberAddress,  @RequestParam("extrAddress") String memberAddress2, Model model) {
         //Vo 클래스의 Validation을 거치지 못했을 경우
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.toString());
             //Validation 에러 내용을 가져와서 반환
             Map<String,String> map = memberService.validate(bindingResult);
             for(String key: map.keySet()) {
@@ -220,7 +221,7 @@ public class MemberController {
             memberService.updateMember(newMemberInfo);
 
             model.addAttribute("member",originMemberInfo);
-            model.addAttribute("content","/views/member/modifyInfo");
+            model.addAttribute("content","/main");
 
         }
         

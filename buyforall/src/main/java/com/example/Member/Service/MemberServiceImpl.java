@@ -116,8 +116,8 @@ public class MemberServiceImpl implements MemberService {
 
         //매개변수로 입력받은 새로운 비밀번호 암호화
         String encodePwd = passwordEncoder.encode(updateMember.getPassword());
+        //새로운 정보를 MemberVo 객체에 적용
         modifiedMember.setPassword(encodePwd);
-        // 그 외 나머지 정보들 새로운 Vo 객체에 적용
         modifiedMember.setMemberName(updateMember.getMemberName());
         modifiedMember.setMemberEmail(updateMember.getMemberEmail());
         modifiedMember.setMemberAddress(updateMember.getMemberAddress());
