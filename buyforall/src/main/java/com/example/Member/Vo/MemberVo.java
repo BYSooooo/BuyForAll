@@ -35,7 +35,8 @@ public class MemberVo {
     String memberEmail; //회원 이메일
     String memberGrade; //회원 등급(Security Role)
     String postNumber;  // 회원 주소의 우편번호
-    String memberAddress;   //회원 주소
+    String memberAddress;   //회원 도로명 주소
+    String memberAddress2;      //회원 나머지 주소
     String memberPhoto; //회원 프로필 사진
 
     String lastLogin;   //마지막 로그인

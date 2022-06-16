@@ -17,5 +17,10 @@ public interface MemberDao {
     public void updateLoginTime (Map<String,String> map);
     // 아이디 찾기 과정에서 이메일로 아이디 찾기
     public String getIdbyEmail(String memberEmail);
-    
+    // 임시 비밀번호 발급 과정에서 아이디, 이메일로 회원 여부 찾기
+    public int checkMemberInfoForPwd(Map<String,String> map);
+    // 임시 비밀번호 발급 과정에서 암호화된 Pwd로 DB업데이트
+    public void updateTempPwd(Map<String,String> map);
+    // 회원 정보 수정
+    public void reWriteMemberInfo(MemberVo member);
 }

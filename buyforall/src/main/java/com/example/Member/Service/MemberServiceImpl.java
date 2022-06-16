@@ -10,8 +10,13 @@ import com.example.Member.Vo.MemberVo;
 import com.example.Member.Vo.SecMemberVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -23,6 +28,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     
     @Override
     public int checkEmail(String memberEmail) {
@@ -81,6 +90,47 @@ public class MemberServiceImpl implements MemberService {
             searchResult = "일치하는 이메일이 없습니다.";
         }
         return searchResult;
+    }
+    @Override
+    public int checkIdAndEmail(String memberId, String memberEmail) {
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("memberId", memberId);
+        map.put("memberEmail", memberEmail);
+        //DB에 쿼리 전송 후 일치하면 정보가 있으면 1, 없으면 0
+        return memberDao.checkMemberInfoForPwd(map);
+    }
+    @Override
+    public void modifyPwd(String memberEmail, String tempPwd) {
+        String cryptoTempPwd = passwordEncoder.encode(tempPwd);
+        Map<String,String> map = new HashMap<>();
+        map.put("memberEmail", memberEmail);
+        map.put("memberPwd", cryptoTempPwd);
+        memberDao.updateTempPwd(map);
+    }
+
+    @Override
+    @Transactional
+    public void updateMember(MemberVo updateMember) {
+        //Dirty Checking을 통한 자동 commit, update를 위해 Repository를 통해 DB에서 수정 전 정보를 가져옴
+        MemberVo modifiedMember = memberDao.getMemberByID(updateMember.getMemberId());
+
+        //매개변수로 입력받은 새로운 비밀번호 암호화
+        String encodePwd = passwordEncoder.encode(updateMember.getPassword());
+        //새로운 정보를 MemberVo 객체에 적용
+        modifiedMember.setPassword(encodePwd);
+        modifiedMember.setMemberName(updateMember.getMemberName());
+        modifiedMember.setMemberEmail(updateMember.getMemberEmail());
+        modifiedMember.setMemberAddress(updateMember.getMemberAddress());
+        modifiedMember.setMemberAddress2(updateMember.getMemberAddress2());
+        modifiedMember.setPostNumber(updateMember.getPostNumber());
+        //Transaction을 통해 Vo 객체의 변경이 발생하면 DirtyChecking 작동 -> 자동 Commit
+        
+        // //회원 정보 Dao에 전달
+        // memberDao.reWriteMemberInfo(updateMember);
+
+        // 로그아웃 없이 인증정보를 변경하기 위해 새로운 인증 Token 생성
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(updateMember.getMemberId(),updateMember.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
 }

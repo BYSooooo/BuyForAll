@@ -43,8 +43,16 @@ public class MemberDaoImpl implements MemberDao {
         var result = this.session.selectOne("Member.getIdByEmail",memberEmail);
         return result == null ? "null" : result.toString();
     }
-
-    
-    
-    
+    @Override
+    public int checkMemberInfoForPwd(Map<String,String> map) {
+        return this.session.selectOne("Member.getResultForPwd",map);
+    }
+    @Override
+    public void updateTempPwd(Map<String,String> map) {
+        this.session.update("Member.updateTempPwd", map);
+    }
+    @Override
+    public void reWriteMemberInfo(MemberVo member) {
+        this.session.update("Member.updateMember",member);   
+    }
 }

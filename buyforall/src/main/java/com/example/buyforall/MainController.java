@@ -12,9 +12,11 @@ public class MainController{
     
     @GetMapping("/main")
     public String main(Model model, @AuthenticationPrincipal SecMemberVo member) throws Exception {
+        System.out.println(member == null ? "member = null" : "member != null");
+        //인증 정보 객체 Model에 추가
+        model.addAttribute("member",member);
         model.addAttribute("content", "/main");
         return "/templates";
     }
-    
     
 }

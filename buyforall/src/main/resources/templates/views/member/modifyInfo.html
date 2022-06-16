@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html 
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{css/member/modifyInfo.css}" />
+    </th:block>
+    <th:block layout:fragment="script">
+        <script th:src="@{/javascript/member/modifyInfo.js}" ></script>
+    </th:block>
+    <!-- 주소 검색 구현부 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function searchAddress() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+    
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                       extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraRoadAddr !== ''){
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+    
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('postNumber').value = data.zonecode;
+                    document.getElementById("roadAddress").value = roadAddr;
+                    document.getElementById("jibunAddress").value = data.jibunAddress;
+                    
+                    // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                    if(roadAddr !== ''){
+                        document.getElementById("addressEtc").value = extraRoadAddr;
+                    } else {
+                        document.getElementById("addressEtc").value = '';
+                    }
+    
+                    var guideTextBox = document.getElementById("guide");
+                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                    if(data.autoRoadAddress) {
+                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                        guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                        guideTextBox.style.display = 'block';
+    
+                    } else if(data.autoJibunAddress) {
+                        var expJibunAddr = data.autoJibunAddress;
+                        guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else {
+                        guideTextBox.innerHTML = '';
+                        guideTextBox.style.display = 'none';
+                    }
+                }
+            }).open();
+        }
+    </script>
+    <!-- 주소 검색 시 새로운 창 팝업 -->
+    <span id="guide" style="color:#999;display:none"></span>
+
+    <div id="modifyContainer" class="container">
+        <div class="modifyFormLayout">
+            <form action="/updateInfo" method="POST">
+                <div class="form-signin-heading">
+                    <h1>회원정보수정</h1>
+                </div>
+                <div id="modifyComment">
+                    회원정보를 수정할 수 있습니다.<br>
+                    수정 후 확인 버튼을 누르면 완료됩니다.
+                </div>
+                <div id="EmailAndPw">
+                    <div class="inputCustomClass">
+                        <label for="memberId">ID</label>
+                        <input type="text" class="form-control form-control-sm" id="memberId" name="memberId" th:value="${member.getMember().getMemberId()}" readonly>
+                        <div id="idText">아이디는 변경할 수 없습니다.</div>
+                    </div>
+                    <div class="inputCustomClass">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="영문 대소문자/숫자/특수문자를 포함한 10~20자">
+                        <div id="checkPwResult" name="checkPwResult" th:text="${valid_password}"></div>
+                    </div>
+                    <div class="inputCustomClass">
+                        <label for="memberEmail">Email</label>
+                        <input type="text" class="form-control form-control-sm" id="memberEmail" name="memberEmail" th:value="${member.getMember().getMemberEmail()}" readonly>
+                        <div id="verifyEmail" name="verifyEmail">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#emailModal">재인증</button>
+                            <span id="emailText" name="emailText">이메일 변경을 위해서는 재인증이 필요합니다.</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="nameAndAddress">
+                    <div class="inputCustomClass">
+                        <label for="memberName">이름</label>
+                        <input type="text" class="form-control form-control-sm" id="memberName" name="memberName" th:value="${member.getMember().getMemberName()}" >
+                    </div>
+                    <label for="memberAddress">주소지</label>
+                    <div class="inputCustomClass">
+                        <div id="addressDiv">
+                            <input type="text" aria-label="PostNumber" class="form-control form-control-sm" id="postNumber" name="postNumber" th:value="${member.getMember().getPostNumber()}" placeholder="우편번호" readonly>
+                            <input class="btn btn-outline-secondary btn-sm" type="button" id="searchAddr" value="검색" onclick="searchAddress()">
+                        </div>
+                        
+                        <input type="text" aira-label="roadAddress" class="form-control form-control-sm" id="roadAddress" name="roadAddress" th:value="${member.getMember().getMemberAddress()}" placeholder="도로명 주소" readonly>
+                        <input type="text" aira-label="extrAddress" class="form-control form-control-sm" id="extrAddress" name="extrAddress" th:value="${member.getMember().getMemberAddress2()}"placeholder="나머지 주소를 입력하세요">
+                        <input type="text" id="jibunAddress" hidden>
+                        <input type="text" id="addressEtc" hidden>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a type="button" th:href="@{/main}" class="btn btn-secondary btn-block" style="width: 100%;">취소</a>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">완료</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+
+    </div>
+    <!-- Email 재인증 첫 번째 Modal : 주소 입력 및 인증번호 발송 -->
+    <div class="modal fade" id="emailModal" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">이메일 재인증</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="emailText">
+                        <labal for="inputEmail">사용하려는 이메일을 입력하세요.</labal>
+                        <input type="text" class="form-control form-control-sm" id="inputEmail" name="inputEmail" placeholder="Example@email.com">
+                        <button type="button" class="btn btn-primary btn-sm" id="sendVeriNum" name="sendVeriNum">인증번호전송</button>
+                        <span id="checkInputEmailDB" name="checkInputEmailDB"><br></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button id="popupNextModal" name="popupNextModal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyNumModal" data-bs-dismiss="modal" disabled>다음</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Email 재인증 두 번째 : 인증번호 입력 및 일치 확인 후 변경 -->
+    <div class="modal fade" id="verifyNumModal" name="verifyNumModal" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">인증번호확인</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="veriNumText">
+                        이메일로 발송된 인증번호를 입력하세요.<br>
+                        이메일이 발송되지 않았거나 다른 이메일을 사용하고 싶다면 <br>
+                        '이전' 버튼을 클릭해서 인증 절차를 다시 진행해주세요.
+                    </div>
+                    <div id="inputVeriNumDiv">
+                        <label for="inputVerifyNum">인증번호입력</label>
+                        <input type="text" class="form-control form-control-sm" id="inputVeriNum" name="inputVeriNum" placeholder="인증번호를 입력하세요.">
+                        <div id="resultCheckNum" name="resultCheckNum"></div> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="returnModal" name="returnModal" class="btn btn-secondary" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#emailModal" >이전</button>
+                    <button id="veriComplete" name="veriComplete" class="btn-btn-primary" data-bs-dismiss="modal" disabled>변경 완료</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</html>
