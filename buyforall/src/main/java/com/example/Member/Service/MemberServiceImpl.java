@@ -114,9 +114,9 @@ public class MemberServiceImpl implements MemberService {
         //Dirty Checking을 통한 자동 commit, update를 위해 Repository를 통해 DB에서 수정 전 정보를 가져옴
         MemberVo modifiedMember = memberDao.getMemberByID(updateMember.getMemberId());
 
-        //매개변수로 입력받은 새로운 비밀번호 암호화
-        String encodePwd = passwordEncoder.encode(updateMember.getPassword());
+        
         //새로운 정보를 MemberVo 객체에 적용
+        String encodePwd = passwordEncoder.encode(updateMember.getPassword());
         modifiedMember.setPassword(encodePwd);
         modifiedMember.setMemberName(updateMember.getMemberName());
         modifiedMember.setMemberEmail(updateMember.getMemberEmail());
@@ -124,9 +124,9 @@ public class MemberServiceImpl implements MemberService {
         modifiedMember.setMemberAddress2(updateMember.getMemberAddress2());
         modifiedMember.setPostNumber(updateMember.getPostNumber());
         //Transaction을 통해 Vo 객체의 변경이 발생하면 DirtyChecking 작동 -> 자동 Commit
-        
-        // //회원 정보 Dao에 전달
-        // memberDao.reWriteMemberInfo(updateMember);
+
+        //회원 정보 Dao에 전달
+        memberDao.reWriteMemberInfo(modifiedMember);
 
         // 로그아웃 없이 인증정보를 변경하기 위해 새로운 인증 Token 생성
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(updateMember.getMemberId(),updateMember.getPassword()));
