@@ -1,0 +1,5 @@
+#mainWrapper {
+    border: 1px red solid;
+    min-width: none;
+    height: 500px;
+}

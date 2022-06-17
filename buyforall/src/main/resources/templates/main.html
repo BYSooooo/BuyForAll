@@ -2,13 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <div>
-        <h2>This is Main.html</h2>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{css/main/main.css}" />
+    </th:block>
+    <th:block layout:fragment="script">
+        <script th:src="@{/javascript/main/main.js}" ></script>
+    </th:block>
+    <div id="mainWrapper">
+        <div id="imageSlide">
+            <h1>Image Slide 자리입니다.</h1>
+        </div>
+        <div id="mainIcon">
+            <h3>아이콘이 들어갈 자리 입니다.</h3>
+        </div>
 
     </div>
-
-
-
-
 
 </html>
