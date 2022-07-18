@@ -6,9 +6,9 @@ Toy Project - Shopping Mall Web Application
 상품을 조회하고 장바구니에 담아 구매할 수 있는 기능을 가진 웹 사이트 구현
 ## 시스템 환경
 - IDE : Visual Basic Code
-- Back-end : Java Spring Boot, MyBatis
-- Front-End : Javascript, HTML5, CSS
-- DataBase : MySQL, Ubuntu Linux, Vitual Box
+- Back-end : Java 17, Spring Boot Framework, MyBatis
+- Front-End : Javascript, HTML5, CSS, Bootstrap 5
+- DataBase : MySQL, Ubuntu LTS 20.04, Vitual Box
 ## 기능 구현
 - 회원가입 / 이메일 인증번호 발송과 입력을 통한 사용자 인증 <br>
 ![member01](https://user-images.githubusercontent.com/92851138/179461845-149f050c-992a-4583-854e-1dddfca5e67c.png)
