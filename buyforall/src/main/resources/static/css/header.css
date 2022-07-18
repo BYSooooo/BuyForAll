@@ -54,4 +54,8 @@
     font-size: small;
 }
 
+/* 카테고리 글자 디자인*/
+.nav-item {
+    text-decoration: none;
+}
 
