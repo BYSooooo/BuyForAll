@@ -10,6 +10,6 @@ Toy Project - Shopping Mall Web Application
 - Front-End : Javascript, HTML5, CSS
 - DataBase : MySQL, Ubuntu Linux, Vitual Box
 ## 기능 구현
-- 회원가입 / 이메일 인증번호 발송과 입력을 통하 사용자 인증
+- 회원가입 / 이메일 인증번호 발송과 입력을 통하 사용자 인증 <br>
 ![member01](https://user-images.githubusercontent.com/92851138/179459568-8f75058e-8446-49dd-a863-1ce9549dafb1.png)
 ![member02](https://user-images.githubusercontent.com/92851138/179459761-673506bc-77fe-4bc6-bfd6-071254af6907.png)
