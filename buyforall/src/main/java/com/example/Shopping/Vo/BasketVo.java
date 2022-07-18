@@ -1,4 +1,4 @@
-package com.example.Shopping;
+package com.example.Shopping.Vo;
 
 import java.util.ArrayList;
 
