@@ -81,23 +81,62 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
     </div>
     <!-- 헤더 하단 카테고리 표시 부분 -->
     <div id="headerBottom">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light row ">
             <div class="container-fluid">
                 <!-- 카테고리 전체 토글 메뉴 -->
-                <div class="dropdown">
+                <div class="dropdown col">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="categoryBtn" data-bs-toggle="dropdown" aria-expanded="false">
                         카테고리
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="categoryBtn">
+                    <div class="dropdown-menu container-fluid" aria-labelledby="categoryBtn">
+                        <div class="row row-cols-3">
+                            <div id="cate_first" class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a>우유/유제품</a></li>
+                                    <li class="list-group-item"><a>쌀/잡곡</a></li>
+                                    <li class="list-group-item"><a>수산물/건어물</a></li>
+                                    <li class="list-group-item"><a>정육/계란</a></li>
+                                    <li class="list-group-item"><a>커피/차</a></li>
+                                    <li class="list-group-item"><a>라면/즉석식품/통조림</a></li>
+                                </ul>
+                            </div>
+                            <div id="cate_second" class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a>우유</a></li>
+                                    <li class="list-group-item"><a>요거트/요구르트</a></li>
+                                    <li class="list-group-item"><a>두유</a></li>
+                                    <li class="list-group-item"><a>치즈/버터</a></li>
+                                    <li class="list-group-item"><a>냉장디저트/음료</a></li>
+                                </ul>
+                            </div>
+                            <div id="cate_third" class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a>기능강화/어린이우유</a></li>
+                                    <li class="list-group-item"><a>딸기/초코/바나나/기타우유</a></li>
+                                    <li class="list-group-item"><a>멸균우유</a></li>
+                                    <li class="list-group-item"><a>흰우유/저지방우유</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    <!-- <ul class="dropdown-menu" aria-labelledby="categoryBtn">
                         <li class="dropdown-item">과자/시리얼</li>
                         <li class="dropdown-item">라면/즉석식픔/통조림</li>
                         <li class="dropdown-item">가전제품</li>
-                    </ul>
+                        <li class="dropdown-item">우유/유제품</li>
+                    </ul> -->
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#categoryMenu" aria-controls="categoryMenu" aria-expanded="false" aria-label="nav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse container" id="categoryMenu">
+                <div class="collapse navbar-collapse col" id="categoryMenu">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li><a class="nav-item" href="#">전단행사</a></li>
                         <li><a class="nav-item" href="#">신상품</a></li>
