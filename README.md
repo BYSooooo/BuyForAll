@@ -1,6 +1,5 @@
 # BuyForAll
 Toy Project - Shopping Mall Web Application
-BuyForAll_SE로 이관
 ## 프로젝트 목표
 쇼핑몰 사이트 구현
 ## 프로젝트 설명
