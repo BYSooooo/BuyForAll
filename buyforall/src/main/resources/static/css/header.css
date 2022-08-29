@@ -54,4 +54,31 @@
     font-size: small;
 }
 
+/* 카테고리 글자 디자인*/
+.nav-item {
+    text-decoration: none;
+    padding: 0 2em 0 2em;
+    color: gray;
+    overflow-x: visible;
+}
+/* 카테고리 글자 마우스 오버 시 디자인 */
+.nav-item:hover {
+    color: black;
+}
+/* 카테고리 버튼 하위 메뉴 마우스 오버 시 디자인 */
+.dropdown-item:hover {
+    color: blue;
+}
 
+.dropdown-menu {
+    position: absolute;
+    border: 1px solid red;
+    width: max-content;
+}
+.list-group-item {
+    width: 280px;
+    padding-right: 1em;
+}
+.list-group-item:hover {
+    background-color: rgb(182, 182, 255);
+}

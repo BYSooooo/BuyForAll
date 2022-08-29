@@ -1,0 +1,11 @@
+#mainWrapper {
+    border: 1px red solid;
+    min-width: none;
+    height: 500px;
+}
+/* 카테고리 메뉴 글자 디자인*/
+.carousel-inner {
+    height: 500px;
+    width: auto;
+    background-color: gray;
+}
